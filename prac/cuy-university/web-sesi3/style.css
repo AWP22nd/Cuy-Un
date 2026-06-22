@@ -1,0 +1,16 @@
+.tanpa-boots {
+    border: none;
+    padding: 20px;
+    font-weight: 800;
+    font-size: 3em;
+    background-color: crimson;
+    color: #333;
+    cursor: pointer;
+}
+
+.tanpa-boots:hover {
+    background-color: #253648;
+    color: black;
+    transform: rotate(2);
+    transition: all .5s;
+}
