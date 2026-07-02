@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>LAMP SESION</title>
+
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+
+    </head>
+
+    <body>
+        <div class="flex justify-center items-center min-h-screen w-full bg-gray-900 gap-10">
+                <!-- lamp 1 -->
+            <div class="flex flex-col gap-1">
+                <img src ="aset/off.gif" alt = "" id="lamp1" />
+                <button onclick="saklar('on', 1)" class="bg-white p-1 text-black"> Turn Lamp 1 On </button>
+                <button onclick="saklar('off', 1)" class="bg-white p-1 text-black"> Turn Lamp 1 Off </button>
+            </div>
+
+                <!-- lamp 2 -->
+            <div class="flex flex-col gap-1">
+                <img src ="aset/off.gif" alt = "" id="lamp2" />
+                <button onclick="saklar('on', 2)" class="bg-white p-1 text-black"> Turn Lamp 2 On </button>
+                <button onclick="saklar('off', 2)" class="bg-white p-1 text-black"> Turn Lamp 2 Off </button>
+            </div>
+
+                <!-- lamp 3 -->
+            <div class="flex flex-col gap-1">
+                <img src ="aset/off.gif" alt = "" id="lamp3" />
+                <button onclick="saklar('on', 3)" class="bg-white p-1 text-black"> Turn Lamp 3 On </button>
+                <button onclick="saklar('off', 3)" class="bg-white p-1 text-black"> Turn Lamp 3 Off </button>
+            </div>
+        </div>
+        <script src="saklar.js" type="application/javascript"></script>
+    </body>
+</html>
