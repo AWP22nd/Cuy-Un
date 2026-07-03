@@ -27,9 +27,9 @@
 }
 
 #bio {
-    background-color: rgb(247, 129, 129);
+    background-color: transparent;
     width: 200px;
-    height: 200px;
+    height: 100px;
 }
 
 .container-content {
@@ -83,6 +83,6 @@
 }
 
 .footer-h1 {
-    font-size: 30px;
+    font-size: 20px;
     color: white;
 }
