@@ -1,37 +1,78 @@
-            function saklar(lampNumber) {
-                let toggle1 = document.getElementById("default-toggle1");
-                let toggle2 = document.getElementById("default-toggle2");
-                let toggle3 = document.getElementById("default-toggle3");
-                let lamp1 = document.getElementById("lamp1");
-                let lamp2 = document.getElementById("lamp2");
-                let lamp3 = document.getElementById("lamp3")
+// Lamp Switching System - CUYUNIVERSITY Sesi 4
 
+// Room configurations
+const rooms = {
+    1: { name: 'Ruangan Keluarga', lamps: [1, 2, 3], color: 'red' },
+    2: { name: 'Ruangan Makan', lamps: [4], color: 'orange' },
+    3: { name: 'Ruangan Tidur', lamps: [5, 6], color: 'blue' },
+    4: { name: 'Ruangan Tamu', lamps: [7, 8, 9, 10], color: 'purple' }
+};
 
+// Toggle individual lamp
+function toggleLamp(lampNumber) {
+    const lamp = document.getElementById(`lamp${lampNumber}`);
+    const switchEl = document.getElementById(`switch${lampNumber}`);
 
-                // toggle.checked ? alert('Lamp 1 is ON') : alert('Lamp 1 is OFF');
+    if (!lamp || !switchEl) return;
 
-                if (toggle1.checked) {
-                        lamp1.src = "aset/on.gif";
-                    // console.log('Lamp 1 is On');
-                } else {
-                        lamp1.src = "aset/off.gif";
-                    // console.log('Lamp 1 is Off');
-                }
-                if (toggle2.checked) {
-                        lamp2.src = "aset/on.gif";
-                    // console.log('Lamp 2 is On');
-                } else {
-                        lamp2.src = "aset/off.gif";
-                    // console.log('Lamp 2 is Off');
-                }
-                if (toggle3.checked) {
-                        lamp3.src = "aset/on.gif";
-                    // console.log('Lamp 3 is On');
-                } else {
-                        lamp3.src = "aset/off.gif";
-                    // console.log('Lamp 3 is Off');
-                }
+    const isOn = switchEl.classList.contains('active');
 
-                // console.log('testing', toggle.checked);
+    if (isOn) {
+        // Turn off
+        lamp.src = 'aset/off1.gif';
+        lamp.classList.remove('lamp-on');
+        lamp.classList.add('lamp-off');
+        switchEl.classList.remove('active');
+    } else {
+        // Turn on
+        lamp.src = 'aset/on1.gif';
+        lamp.classList.remove('lamp-off');
+        lamp.classList.add('lamp-on');
+        switchEl.classList.add('active');
+    }
+}
 
-            }
+// Toggle all lamps in a group/room
+function toggleGroup(roomNumber, turnOn) {
+    const room = rooms[roomNumber];
+    if (!room) return;
+
+    room.lamps.forEach(lampNumber => {
+        const lamp = document.getElementById(`lamp${lampNumber}`);
+        const switchEl = document.getElementById(`switch${lampNumber}`);
+
+        if (!lamp || !switchEl) return;
+
+        if (turnOn) {
+            // Turn on
+            lamp.src = 'aset/on1.gif';
+            lamp.classList.remove('lamp-off');
+            lamp.classList.add('lamp-on');
+            switchEl.classList.add('active');
+        } else {
+            // Turn off
+            lamp.src = 'aset/off1.gif';
+            lamp.classList.remove('lamp-on');
+            lamp.classList.add('lamp-off');
+            switchEl.classList.remove('active');
+        }
+    });
+}
+
+// Initialize all lamps to off state on page load
+document.addEventListener('DOMContentLoaded', () => {
+    // All lamps start off
+    for (let i = 1; i <= 10; i++) {
+        const lamp = document.getElementById(`lamp${i}`);
+        const switchEl = document.getElementById(`switch${i}`);
+
+        if (lamp) {
+            lamp.src = 'aset/off1.gif';
+            lamp.classList.add('lamp-off');
+            lamp.classList.remove('lamp-on');
+        }
+        if (switchEl) {
+            switchEl.classList.remove('active');
+        }
+    }
+});
