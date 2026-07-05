@@ -33,11 +33,6 @@ nav {
     padding: 10px;
 }
 
-.darkNav {
-    background-color: #fcfcfc;
-    color: #333;
-}
-
 nav a {
     background-color: #333;
     color: #fcfcfc;
