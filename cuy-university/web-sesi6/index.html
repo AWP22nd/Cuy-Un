@@ -18,7 +18,6 @@
 
     <script>
         let body = document.body;
-        let nav = document.body;
         let info = document.getElementById("info");
         let mode = document.getElementById("mode");
         let home = document.getElementById("home");
@@ -44,7 +43,6 @@
             info.textContent = `Dark Mode used:  ${darkCounter}x, left:  ${darkRemainingLeft}`
 
             body.classList.toggle("dark");
-            nav.classList.toggle("darkNav");
             
         }
             function reRender() {
