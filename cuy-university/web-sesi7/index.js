@@ -1,9 +1,3 @@
-const namaSaya = "skebow";
+const http = require('http');
 
-function getName() {
-    for (let i = 0; i <= 1000; i++) {
-    console.log("Nama saya adalah", namaSaya)
-    }
-};
-
- getName();
+console.log(http);
