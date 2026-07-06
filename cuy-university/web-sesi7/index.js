@@ -1,7 +1,9 @@
 const namaSaya = "skebow";
 
 function getName() {
-    console.log(namaSaya);
+    for (let i = 0; i <= 1000; i++) {
+    console.log("Nama saya adalah", namaSaya)
+    }
 };
 
  getName();
