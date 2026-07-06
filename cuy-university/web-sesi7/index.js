@@ -1,3 +1,7 @@
 const namaSaya = "skebow";
 
-console.log(namaSaya);
+function getName() {
+    console.log(namaSaya);
+};
+
+ getName();
