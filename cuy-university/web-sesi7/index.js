@@ -21,7 +21,7 @@ const server = http.createServer (function (request, response) {
     <body>
         <h1 style = 'background: green; color: white; padding: 18px; text-align: center'> NODE JS </h1>
         <p>
-            Hi ${name}! Anda belanja sebanyak ${shopping}, uang yang Anda gunakan sebnayak ${mon} lalu menjadi ${chan}.
+            Hi ${name}! Anda belanja sebanyak ${shopping}, uang yang Anda gunakan sebnayak ${mon} lalu menjadi ${sisaRupiah}.
         </p>
     </body>    
     `
