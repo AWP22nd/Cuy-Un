@@ -25,7 +25,7 @@ const server = http.createServer (function (request, response) {
     const jumlahCPU = os.cpus();
 
 function checkCPU() {
-    let myCPU;
+    let myCPU = [];
     jumlahCPU.map((cpu, i) => {
         myCPU.push(cpu.model)
     })
@@ -45,7 +45,8 @@ function checkCPU() {
             Hi ${nama}! Anda belanja sebanyak ${belanja}, uang yang Anda gunakan sebnayak ${uang} lalu menjadi ${sisa}.
         </p>
         <h5> Sisa RAM PC saya: ${sisaRAM}'</h5>
-        <h5> Sisa CPU PC saya: ${jumlahCPU}'</h5>
+        <h5> Sisa CPU PC saya: <br/> ${jumlahCPU}'</h5>
+        <h5> CPU PC saya: <br/> ${checkCPU()}'</h5>
     </body>    
     `
     response.statusCode = 200;
