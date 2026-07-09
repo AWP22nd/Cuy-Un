@@ -1,32 +1,55 @@
 const http = require('http');
 const rupiah = require('rupiah-format');
-const host = '127.0.0.1';
-const port = 3002;
+const fs = require('fs');
+const os = require('os');
+
+const host = '127.0.0.1'
+const port = 3002
 
 // In n Out
 const server = http.createServer (function (request, response) {
-    const name = 'Skebow';
-    const mon = 1000000;
-    const shopping = 100000;
-    const chan = mon - shopping;
+    const nama = "Skebow";
+    let uang = 1000000;
+    let belanja = 100000;
+    let sisa = uang - belanja;
 
-    const sisaRupiah = rupiah.convert(sisa);
-    console.log('Sisa Rupiah: ', sisaRupiah);
+    uang = rupiah.convert(uang)
+    belanja = rupiah.convert(belanja)
+    sisa = rupiah.convert(sisa)
 
-    const resl = `
+    fs.appendFile('sisauang.txt', sisa, () => {
+        console.log('Data uang berhasil disimpan');
+    });
+
+    const sisaRAM = os.freemem();
+    const jumlahCPU = os.cpus();
+
+function checkCPU() {
+    let myCPU;
+    jumlahCPU.map((cpu, i) => {
+        myCPU.push(cpu.model)
+    })
+    return myCPU
+}
+
+    console.log(checkCPU())
+
+    const hasil = `
     
     <head>
-        <title>${name}</title>
+        <title>${nama}</title>
     </head>
     <body>
         <h1 style = 'background: green; color: white; padding: 18px; text-align: center'> NODE JS </h1>
         <p>
-            Hi ${name}! Anda belanja sebanyak ${shopping}, uang yang Anda gunakan sebnayak ${mon} lalu menjadi ${sisaRupiah}.
+            Hi ${nama}! Anda belanja sebanyak ${belanja}, uang yang Anda gunakan sebnayak ${uang} lalu menjadi ${sisa}.
         </p>
+        <h5> Sisa RAM PC saya: ${sisaRAM}'</h5>
+        <h5> Sisa CPU PC saya: ${jumlahCPU}'</h5>
     </body>    
     `
     response.statusCode = 200;
-    response.end(resl)
+    response.end(hasil)
 });
 
 server.listen(port, host, function () {
