@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Multi-Role Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        #root {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        .auth-section {
+            padding: 30px;
+        }
+        .auth-section h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #loginButton { background: #667eea; color: white; }
+        #registerButton { background: #28a745; color: white; }
+        #logoutButton { background: #dc3545; color: white; }
+
+        .dashboard {
+            padding: 30px;
+            display: none;
+        }
+        .dashboard h2 {
+            color: #333;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+        .dashboard-content {
+            color: #555;
+            line-height: 1.6;
+        }
+        .role-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .admin-badge { background: #dc3545; color: white; }
+        .moderator-badge { background: #ffc107; color: #333; }
+        .user-badge { background: #28a745; color: white; }
+        .guest-badge { background: #6c757d; color: white; }
+
+        .dashboard-section {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <!-- AUTH SECTION -->
+        <div class="auth-section" id="authSection">
+            <h1>🔐 Login / Register</h1>
+
+            <div id="loginForm">
+                <h3 style="margin-bottom: 15px; color: #555;">Login</h3>
+                <div class="form-group">
+                    <input type="text" placeholder="Username" id="usernameInput"/>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Password" id="passwordInput"/>
+                </div>
+                <button onclick="onLogin()" id="loginButton">Login</button>
+            </div>
+
+            <hr style="margin: 20px 0;">
+
+            <div id="registerForm">
+                <h3 style="margin-bottom: 15px; color: #555;">Register New User</h3>
+                <div class="form-group">
+                    <input type="text" placeholder="New Username" id="newUsernameInput"/>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="New Password" id="newPasswordInput"/>
+                </div>
+                <div class="form-group">
+                    <select id="roleSelect">
+                        <option value="">Select Role</option>
+                        <option value="admin">Admin</option>
+                        <option value="moderator">Moderator</option>
+                        <option value="user">User</option>
+                        <option value="guest">Guest</option>
+                    </select>
+                </div>
+                <button onclick="onRegister()" id="registerButton">Register</button>
+            </div>
+        </div>
+
+        <!-- DASHBOARD SECTIONS -->
+        <div class="dashboard" id="adminDashboard">
+            <h2>👑 Admin Dashboard <span class="role-badge admin-badge">ADMIN</span></h2>
+            <div class="dashboard-content">
+                <div class="dashboard-section">
+                    <h4>📊 System Overview</h4>
+                    <p>You have full access to all system features. Here you can manage users, view reports, and configure system settings.</p>
+                </div>
+                <div class="dashboard-section">
+                    <h4>🔑 Quick Actions</h4>
+                    <ul>
+                        <li>Create new users</li>
+                        <li>View all system logs</li>
+                        <li>Modify system configuration</li>
+                        <li>Generate detailed reports</li>
+                    </ul>
+                </div>
+            </div>
+            <button onclick="onLogout()" id="logoutButton" style="margin-top: 20px;">Logout</button>
+        </div>
+
+        <div class="dashboard" id="moderatorDashboard">
+            <h2>🛡️ Moderator Dashboard <span class="role-badge moderator-badge">MODERATOR</span></h2>
+            <div class="dashboard-content">
+                <div class="dashboard-section">
+                    <h4>📋 Content Management</h4>
+                    <p>You can review and moderate user-generated content. Check pending reviews and manage reported items.</p>
+                </div>
+                <div class="dashboard-section">
+                    <h4>⚠️ Pending Actions</h4>
+                    <ul>
+                        <li>Review reported posts</li>
+                        <li>Approve new user registrations</li>
+                        <li>Handle support tickets</li>
+                    </ul>
+                </div>
+            </div>
+            <button onclick="onLogout()" id="logoutButton" style="margin-top: 20px;">Logout</button>
+        </div>
+
+        <div class="dashboard" id="userDashboard">
+            <h2>👤 User Dashboard <span class="role-badge user-badge">USER</span></h2>
+            <div class="dashboard-content">
+                <div class="dashboard-section">
+                    <h4>🎯 Your Profile</h4>
+                    <p>This is your personal dashboard. You can view your profile, edit settings, and access your personal features.</p>
+                </div>
+                <div class="dashboard-section">
+                    <h4>📝 My Activities</h4>
+                    <ul>
+                        <li>View my posts</li>
+                        <li>Manage my subscriptions</li>
+                        <li>View billing information</li>
+                    </ul>
+                </div>
+            </div>
+            <button onclick="onLogout()" id="logoutButton" style="margin-top: 20px;">Logout</button>
+        </div>
+
+        <div class="dashboard" id="guestDashboard">
+            <h2>👋 Guest Dashboard <span class="role-badge guest-badge">GUEST</span></h2>
+            <div class="dashboard-content">
+                <div class="dashboard-section">
+                    <h4>🎉 Welcome!</h4>
+                    <p>Thank you for visiting. As a guest, you have limited access. Register or login to unlock more features!</p>
+                </div>
+                <div class="dashboard-section">
+                    <h4>🔍 What You Can Do</h4>
+                    <ul>
+                        <li>Browse public content</li>
+                        <li>View basic information</li>
+                        <li>Access limited features</li>
+                    </ul>
+                </div>
+            </div>
+            <button onclick="onLogout()" id="logoutButton" style="margin-top: 20px;">Logout</button>
+        </div>
+    </div>
+
+    <script type="application/javascript">
+        // Storage keys
+        const USERS_KEY = "registeredUsers";
+        const CURRENT_USER_KEY = "currentUser";
+
+        // Initialize users in storage if not exists
+        function initStorage() {
+            if (!localStorage.getItem(USERS_KEY)) {
+                // Default users
+                const defaultUsers = {
+                    "admin": { password: "admin123", role: "admin" },
+                    "moderator": { password: "mod123", role: "moderator" },
+                    "user": { password: "user123", role: "user" },
+                    "guest": { password: "guest123", role: "guest" }
+                };
+                localStorage.setItem(USERS_KEY, JSON.stringify(defaultUsers));
+            }
+        }
+
+        // Get registered users
+        function getRegisteredUsers() {
+            return JSON.parse(localStorage.getItem(USERS_KEY) || "{}");
+        }
+
+        // Register new user
+        function onRegister() {
+            const username = document.getElementById("newUsernameInput").value.trim();
+            const password = document.getElementById("newPasswordInput").value;
+            const role = document.getElementById("roleSelect").value;
+
+            if (!username || !password || !role) {
+                alert("Please fill all registration fields!");
+                return;
+            }
+
+            const users = getRegisteredUsers();
+            if (users[username]) {
+                alert("Username already exists!");
+                return;
+            }
+
+            users[username] = { password: password, role: role };
+            localStorage.setItem(USERS_KEY, JSON.stringify(users));
+            alert("User registered successfully! You can now login.");
+            document.getElementById("newUsernameInput").value = "";
+            document.getElementById("newPasswordInput").value = "";
+            document.getElementById("roleSelect").value = "";
+        }
+
+        // Login
+        function onLogin() {
+            const username = document.getElementById("usernameInput").value.trim();
+            const password = document.getElementById("passwordInput").value;
+
+            if (!username || !password) {
+                alert("Please enter username and password!");
+                return;
+            }
+
+            const users = getRegisteredUsers();
+
+            if (!users[username]) {
+                alert("User not registered! Please register first.");
+                return;
+            }
+
+            if (users[username].password !== password) {
+                alert("Incorrect password!");
+                return;
+            }
+
+            // Store current user
+            localStorage.setItem(CURRENT_USER_KEY, JSON.stringify({
+                username: username,
+                role: users[username].role
+            }));
+
+            showDashboard(users[username].role);
+        }
+
+        // Show dashboard based on role
+        function showDashboard(role) {
+            document.getElementById("authSection").classList.add("hidden");
+            document.querySelectorAll('.dashboard').forEach(d => d.classList.remove('hidden'));
+        }
+
+        // Logout
+        function onLogout() {
+            document.getElementById("authSection").classList.remove("hidden");
+            document.querySelectorAll('.dashboard').forEach(d => d.classList.add("hidden"));
+            document.getElementById("usernameInput").value = "";
+            document.getElementById("passwordInput").value = "";
+            localStorage.clear();
+            location.reload();
+        }
+
+        // Check if user is already logged in
+        function checkLoggedIn() {
+            const currentUser = localStorage.getItem(CURRENT_USER_KEY);
+            if (currentUser) {
+                const user = JSON.parse(currentUser);
+                showDashboard(user.role);
+            }
+        }
+
+        // Initialize on page load
+        window.onload = function() {
+            initStorage();
+            checkLoggedIn();
+        };
+    </script>
+</body>
+</html>
