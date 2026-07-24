@@ -20,16 +20,10 @@ const generatePassword = (len) => {
 const getPassword = () => {
     const newPassword = generatePassword(passwordLength.value)
     password.value = newPassword
-    setTimeout(() => {
-    alert('password has been generated!')
-    }, 1000)
 }
 
 const savePassword = () => {
     document.title = password.value
     saveButton.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent (`My Password: ${document.title}`))
     saveButton.setAttribute('Download', 'MyPasswordGeneratorLOG.txt')
-    setTimeout(() => {
-    alert('password has been saved!')
-    }, 1000)
 }
