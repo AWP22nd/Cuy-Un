@@ -1,8 +1,28 @@
-const myName = "skebow"
-let myAddres
+const siswa = [
+    {
+    nama: "skebow",
+    alamat: "JP",
+    usia: 17,
+    pekerjaan: "Programmer"
+    },
+    {
+    nama: "skeclow",
+    alamat: "ID",
+    usia: 14,
+    pekerjaan: "Programmer"
+    }
+]
 
-function getDetailHuman(data1, data2) {
-    console.log (`data1 adalah ${data1}, data2 adalah ${data2}`)
+let i = 0;
+
+function getDetailData() {
+    // siswa.map(function (result, ) {
+    //     console.table(result)
+    // })
+
+    siswa.forEach(result => {
+        console.table(result)
+    });
+
+    // console.log(`Data yang anda cari adalah: ${siswa}`)
 }
-
-getDetailHuman("bow", 2206)
