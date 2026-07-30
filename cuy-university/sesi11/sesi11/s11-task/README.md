@@ -1,6 +1,6 @@
-====================================================
---------------    Sesi 11 Task!    -----------------
-====================================================
+=======================================<br>
+=============== Sesi 11 Task! =============<br>
+=======================================<br>
 
 1. Membuat tombol reset:
 untuk mengembalikan warna latar belakang (background) website ke warna semula (putih) setelah pengguna melakukan perubahan warna.
