@@ -17,5 +17,15 @@
             <div class="circle purple"></div>
         </div>
     </div>
+    <script>
+        const circles = document.querySelectorAll(".circle");
+        console.log(circles)
+        circles.forEach(circle => {
+            circle.addEventListener("click", (style) => {
+                const computedStyle = window.getComputedStyle(style.target)
+                console.log(computedStyle)
+            })
+        })
+    </script>
 </body>
 </html>
