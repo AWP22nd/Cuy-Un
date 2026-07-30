@@ -1,11 +1,28 @@
+*, html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    transition: all .8s ease-in-out;
+}
+
 .container {
     width: 100%;
     height: 100vh;
-    border: 2px solid black;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.title {
+    margin: 10px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 700;
+    font-size: 25px;
+    padding: 10px;
 }
 
 .box  {
