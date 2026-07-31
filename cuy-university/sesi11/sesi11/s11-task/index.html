@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Changer - Sesi 11 Task</title>
+    <link rel="stylesheet" href="/sesi11/s11-task/style.css" />
+    <style>
+        .circle.black { background: black; }
+        #resetBtn { margin-top: 20px; padding: 10px 20px; background: rgb(224, 255, 253); color: #000; border: none; border-radius: 20px; cursor: pointer; font-weight: bold; }
+        #resetBtn:hover { background: rgb(143, 193, 189); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">Select Color</div>
+        <div class="box">
+            <div class="circle red"></div>
+            <div class="circle yellow"></div>
+            <div class="circle green"></div>
+            <div class="circle blue"></div>
+            <div class="circle purple"></div>
+            <div class="circle black"></div>
+        </div>
+        <button id="resetBtn">Reset Background</button>
+    </div>
+
+    <!-- Reset -->
+    <script>
+        function resetBackground() {
+            document.body.style.backgroundColor = 'white';
+            document.querySelector('.title').style.color = 'black';
+        }
+        document.getElementById('resetBtn').addEventListener('click', resetBackground);
+    </script>
+
+    <!-- when black circle is clicked -->
+    <script>
+        const circles = document.querySelectorAll('.circle');
+        circles.forEach(circle => {
+            circle.addEventListener('click', ({target}) => {
+                const { backgroundColor } = getComputedStyle(target);
+                document.body.style.backgroundColor = backgroundColor;
+
+                // If black circle is clicked, change title text to white
+                if (target.classList.contains('black')) {
+                    document.querySelector('.title').style.color = 'white';
+                } else {
+                    document.querySelector('.title').style.color = 'black';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
