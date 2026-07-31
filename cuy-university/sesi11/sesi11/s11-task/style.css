@@ -1,0 +1,67 @@
+*, html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    transition: all .8s ease-in-out;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    margin: 10px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 700;
+    font-size: 25px;
+    padding: 10px;
+}
+
+.box  {
+    width: 95%;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: rgb(224, 255, 253);
+    padding: 20px;
+    border-radius: 45px;
+}
+
+.circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.resetButton {
+    background-color: rgb(224, 255, 253);
+    
+}
+
+.red {
+    background-color: rgb(230, 68, 68);
+}
+
+.blue {
+    background-color: rgb(68, 154, 230);
+}
+
+.yellow {
+    background-color: rgb(217, 230, 68);
+}
+
+.green {
+    background-color: rgb(68, 230, 146);
+}
+
+.purple {
+    background-color: rgb(122, 68, 230);
+}
